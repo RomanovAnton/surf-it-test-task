@@ -1,1 +1,0 @@
-# surf-it-test-task
