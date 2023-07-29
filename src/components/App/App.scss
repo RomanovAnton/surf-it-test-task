@@ -11,4 +11,10 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
   }
+
+  &__line {
+    height: 2px;
+    background-color: red;
+    grid-column: -1 / 1;
+  }
 }
