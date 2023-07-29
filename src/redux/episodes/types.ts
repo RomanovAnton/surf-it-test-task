@@ -17,6 +17,7 @@ export interface EpisodesState {
     prev: string;
   };
   currentPage: number;
+  currentItem: Episode | null;
   searchValue: string;
   isLoading: boolean;
   error: string;

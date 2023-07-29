@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { EpisodesState } from "./types";
+import { Episode, EpisodesState } from "./types";
 import fetchEpisodes from "./asyncAction";
 import { getCurrentPage } from "../../utils/utils";
 import { Errors } from "../../enum/Errors";
@@ -15,6 +15,7 @@ const initialState: EpisodesState = {
   isLoading: false,
   searchValue: "",
   currentPage: 1,
+  currentItem: null,
   error: "",
 };
 
@@ -33,6 +34,9 @@ const episodesSlice = createSlice({
     },
     clearResults: (state) => {
       state.results = [];
+    },
+    setCurrentItem: (state, action: PayloadAction<Episode>) => {
+      state.currentItem = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,5 +69,6 @@ const episodesSlice = createSlice({
   },
 });
 
-export const { nextPage, setSearchValue, clearResults } = episodesSlice.actions;
+export const { nextPage, setSearchValue, clearResults, setCurrentItem } =
+  episodesSlice.actions;
 export default episodesSlice.reducer;

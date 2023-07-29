@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import searchIcon from "../../assets/search-icon.svg";
 import { useDispatch } from "react-redux";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -15,11 +15,17 @@ export const SearchInput = () => {
 
   useEffect(() => {
     dispatch(setSearchValue(debouncedValue));
+  }, [debouncedValue]);
 
-    if (value === "") {
+  function handlekeyUp(e: React.KeyboardEvent<HTMLInputElement>): void {
+    if (e.key === "Backspace" || e.key === "Delete") {
       dispatch(clearResults());
     }
-  }, [debouncedValue]);
+  }
+
+  function handleOnChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    setValue(e.target.value);
+  }
 
   return (
     <div className="search">
@@ -28,9 +34,8 @@ export const SearchInput = () => {
         type="text"
         placeholder="Название эпизода..."
         value={value}
-        onChange={(evt) => {
-          setValue(evt.target.value);
-        }}
+        onChange={handleOnChange}
+        onKeyUp={handlekeyUp}
       />
       <img src={searchIcon} alt="search-icon" className="search__icon" />
     </div>
