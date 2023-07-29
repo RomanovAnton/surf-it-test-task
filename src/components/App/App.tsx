@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Episode } from "../../redux/episodes/types";
 import { EpisodeItem } from "../EpisodeItem/EpisodeItem";
 import { nextPage } from "../../redux/episodes/episodesSlice";
+import { SearchInput } from "../SearchInput/SearchInput";
 import "./App.scss";
 
 export const App: React.FC = () => {
@@ -16,7 +17,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchEpisodes({ currentPage, searchValue }));
-  }, [currentPage]);
+  }, [currentPage, searchValue]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -34,6 +35,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="app">
+      <SearchInput />
       <ul className="app__list">
         {episodes.length > 0 &&
           episodes.map((el: Episode, idx) => (

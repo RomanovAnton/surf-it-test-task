@@ -11,11 +11,11 @@ export type Episode = {
 export interface EpisodesState {
   results: Episode[];
   info: {
-    count: number;
-    pages: number;
+    count: number | null;
+    pages: number | null;
     next: string;
     prev: string;
-  } | null;
+  };
   currentPage: number;
   searchValue: string;
   isLoading: boolean;

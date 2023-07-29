@@ -1,11 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EpisodesState } from "./types";
 import fetchEpisodes from "./asyncAction";
 import { getCurrentPage } from "../../utils/utils";
 
 const initialState: EpisodesState = {
   results: [],
-  info: null,
+  info: {
+    count: null,
+    pages: null,
+    prev: "",
+    next: "",
+  },
   isLoading: false,
   searchValue: "",
   currentPage: 1,
@@ -18,9 +23,15 @@ const episodesSlice = createSlice({
 
   reducers: {
     nextPage: (state) => {
-      if (state.currentPage < state.info!.pages) {
+      if (state.currentPage < state.info!.pages!) {
         state.currentPage += 1;
       }
+    },
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    clearResults: (state) => {
+      state.results = [];
     },
   },
   extraReducers: (builder) => {
@@ -30,8 +41,12 @@ const episodesSlice = createSlice({
     builder.addCase(fetchEpisodes.fulfilled, (state, action) => {
       state.isLoading = false;
 
-      const newArr = [...state.results].concat(action.payload.results);
-      state.results = newArr;
+      if (state.searchValue) {
+        state.results = action.payload.results;
+      } else {
+        const newArr = [...state.results].concat(action.payload.results);
+        state.results = newArr;
+      }
 
       state.info = action.payload.info;
       state.currentPage = getCurrentPage(action.payload.info!);
@@ -43,5 +58,5 @@ const episodesSlice = createSlice({
   },
 });
 
-export const { nextPage } = episodesSlice.actions;
+export const { nextPage, setSearchValue, clearResults } = episodesSlice.actions;
 export default episodesSlice.reducer;

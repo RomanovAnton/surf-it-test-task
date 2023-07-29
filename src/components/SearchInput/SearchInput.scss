@@ -1,0 +1,27 @@
+.search {
+  width: 50%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 8px;
+  border-radius: 6px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+
+  &__icon {
+    width: 20px;
+    transition: 0.2s;
+  }
+
+  &__input:focus + &__icon {
+    filter: invert(65%) sepia(39%) saturate(2931%) hue-rotate(47deg)
+      brightness(97%) contrast(99%);
+  }
+}

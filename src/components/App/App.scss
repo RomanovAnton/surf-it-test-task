@@ -1,6 +1,9 @@
 .app {
   margin: auto;
   padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 
   &__list {
     width: 100%;
@@ -8,7 +11,7 @@
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 215px));
     gap: 30px;
   }
 

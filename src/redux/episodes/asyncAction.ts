@@ -10,7 +10,7 @@ const fetchEpisodes = createAsyncThunk<
 >("episodes/fetchEpisodes", async ({ currentPage, searchValue }) => {
   const curPage = searchValue ? "" : currentPage;
   const response = await axios.get(
-    `${BASE_URL}/episode?page=${currentPage}&name=${searchValue}`
+    `${BASE_URL}/episode?page=${curPage}&name=${searchValue}`
   );
   return response.data;
 });
