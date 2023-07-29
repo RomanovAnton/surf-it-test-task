@@ -28,7 +28,9 @@ export const SearchInput = () => {
         type="text"
         placeholder="Название эпизода..."
         value={value}
-        onChange={(evt) => setValue(evt.target.value)}
+        onChange={(evt) => {
+          setValue(evt.target.value);
+        }}
       />
       <img src={searchIcon} alt="search-icon" className="search__icon" />
     </div>

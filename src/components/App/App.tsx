@@ -6,12 +6,13 @@ import { Episode } from "../../redux/episodes/types";
 import { EpisodeItem } from "../EpisodeItem/EpisodeItem";
 import { nextPage } from "../../redux/episodes/episodesSlice";
 import { SearchInput } from "../SearchInput/SearchInput";
+import { Errors } from "../../enum/Errors";
 import "./App.scss";
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const episodes = useSelector((state: RootState) => state.episodes.results);
-  const { currentPage, searchValue } = useSelector(
+  const { currentPage, searchValue, error } = useSelector(
     (state: RootState) => state.episodes
   );
 
@@ -36,21 +37,27 @@ export const App: React.FC = () => {
   return (
     <div className="app">
       <SearchInput />
-      <ul className="app__list">
-        {episodes.length > 0 &&
-          episodes.map((el: Episode, idx) => (
-            <React.Fragment key={el.id}>
-              <li>
-                <EpisodeItem {...el} />
-              </li>
-              {episodes[idx + 1] &&
-                episodes[idx + 1].episode.slice(0, 3) !==
-                  episodes[idx].episode.slice(0, 3) && (
-                  <div className="app__line" key={idx}></div>
-                )}
-            </React.Fragment>
-          ))}
-      </ul>
+      {error == Errors.NOT_FOUND ? (
+        <p className="app__notfound">
+          По вашему запросу ничего не найдено. Измените параметры поиска
+        </p>
+      ) : (
+        <ul className="app__list">
+          {episodes.length > 0 &&
+            episodes.map((el: Episode, idx) => (
+              <React.Fragment key={el.id}>
+                <li>
+                  <EpisodeItem {...el} />
+                </li>
+                {episodes[idx + 1] &&
+                  episodes[idx + 1].episode.slice(0, 3) !==
+                    episodes[idx].episode.slice(0, 3) && (
+                    <div className="app__line" key={idx}></div>
+                  )}
+              </React.Fragment>
+            ))}
+        </ul>
+      )}
     </div>
   );
 };

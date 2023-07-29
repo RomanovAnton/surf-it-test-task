@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EpisodesState } from "./types";
 import fetchEpisodes from "./asyncAction";
 import { getCurrentPage } from "../../utils/utils";
+import { Errors } from "../../enum/Errors";
 
 const initialState: EpisodesState = {
   results: [],
@@ -50,10 +51,16 @@ const episodesSlice = createSlice({
 
       state.info = action.payload.info;
       state.currentPage = getCurrentPage(action.payload.info!);
+      state.error = "";
     });
-    builder.addCase(fetchEpisodes.rejected, (state) => {
-      state.error = "ServerError";
+    builder.addCase(fetchEpisodes.rejected, (state, payload) => {
       state.isLoading = false;
+      if (payload.error.code === Errors.NOT_FOUND) {
+        state.results = [];
+        state.error = Errors.NOT_FOUND;
+        return;
+      }
+      state.error = "ServerError";
     });
   },
 });

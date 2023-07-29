@@ -2,6 +2,7 @@
   margin: auto;
   padding: 35px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 25px;
 
@@ -13,6 +14,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 215px));
     gap: 30px;
+  }
+
+  &__notfound {
+    font-size: 18px;
   }
 
   &__line {
