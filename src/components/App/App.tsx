@@ -3,6 +3,8 @@ import fetchEpisodes from "../../redux/episodes/asyncAction";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { Episode } from "../../redux/episodes/types";
+import { EpisodeItem } from "../EpisodeItem/EpisodeItem";
+import { nextPage } from "../../redux/episodes/episodesSlice";
 import "./App.scss";
 
 export const App: React.FC = () => {
@@ -13,13 +15,28 @@ export const App: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchEpisodes({ currentPage, searchValue }));
+    document.addEventListener("scroll", handleScroll);
   }, []);
 
+  function handleScroll() {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      dispatch(nextPage());
+    }
+  }
+
+  useEffect(() => {
+    dispatch(fetchEpisodes({ currentPage, searchValue }));
+  }, [currentPage]);
+
   return (
-    <div className="block">
-      <h2>{currentPage}</h2>
-      <ul>{episodes.length > 0 && episodes.map((el: Episode) => el.name)}</ul>
+    <div className="app">
+      <ul className="app__list">
+        {episodes.length > 0 &&
+          episodes.map((el: Episode) => <EpisodeItem {...el} key={el.id} />)}
+      </ul>
     </div>
   );
 };

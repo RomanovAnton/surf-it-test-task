@@ -1,0 +1,12 @@
+.episode {
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -16,14 +16,23 @@ const episodesSlice = createSlice({
   name: "episodes",
   initialState,
 
-  reducers: {},
+  reducers: {
+    nextPage: (state) => {
+      if (state.currentPage < state.info!.pages) {
+        state.currentPage += 1;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchEpisodes.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchEpisodes.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.results = action.payload.results;
+
+      const newArr = [...state.results].concat(action.payload.results);
+      state.results = newArr;
+
       state.info = action.payload.info;
       state.currentPage = getCurrentPage(action.payload.info!);
     });
@@ -34,4 +43,5 @@ const episodesSlice = createSlice({
   },
 });
 
+export const { nextPage } = episodesSlice.actions;
 export default episodesSlice.reducer;
