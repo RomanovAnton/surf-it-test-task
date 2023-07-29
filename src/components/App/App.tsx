@@ -15,7 +15,12 @@ export const App: React.FC = () => {
   );
 
   useEffect(() => {
-    document.addEventListener("scroll", handleScroll);
+    dispatch(fetchEpisodes({ currentPage, searchValue }));
+  }, [currentPage]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   function handleScroll() {
@@ -26,10 +31,6 @@ export const App: React.FC = () => {
       dispatch(nextPage());
     }
   }
-
-  useEffect(() => {
-    dispatch(fetchEpisodes({ currentPage, searchValue }));
-  }, [currentPage]);
 
   return (
     <div className="app">
