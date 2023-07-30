@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavBack } from "../NavBack/NavBack";
 import { CharacterCard } from "../CharacterCard/CharacterCard";
+import { Location } from "../../redux/character/types";
 import axios from "axios";
 import "./LocationInfo.scss";
 
 export const LocationInfo = () => {
-  const [data, setData] = useState<any>();
   const navigate = useNavigate();
-
+  const [data, setData] = useState<Location>();
   const url = useSelector(
     (state: RootState) => state.character.info!.location.url
   );

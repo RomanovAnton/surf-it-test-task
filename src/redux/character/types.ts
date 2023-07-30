@@ -18,3 +18,13 @@ export type Character = {
   url: string;
   created: string;
 } | null;
+
+export type Location = {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: string[];
+  url: string;
+  created: string;
+};

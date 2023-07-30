@@ -8,8 +8,8 @@ import {
 } from "../../redux/episodes/episodesSlice";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
-import image from "../../assets/episode-image.png";
 import { SortParams } from "../../enum/SortParams";
+import image from "../../assets/episode-image.png";
 import "./EpisodeCard.scss";
 
 export const EpisodeCard: React.FC<Episode> = (item) => {

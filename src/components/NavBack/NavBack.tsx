@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/back-arrow-icon.svg";
-
 import "./NavBack.scss";
 
 export const NavBack = () => {

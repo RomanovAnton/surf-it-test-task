@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { Episode } from "../../redux/episodes/types";
-import { EpisodeCard } from "../EpisodeCard/EpisodeCard";
 import { nextPage } from "../../redux/episodes/episodesSlice";
 import { SearchInput } from "../SearchInput/SearchInput";
 import { Errors } from "../../enum/Errors";
 import { Sort } from "../Sort/Sort";
+import { EpisodesList } from "../EpisodesList/EpisodesList";
 import arrowTopIcon from "../../assets/arrow-top-icon.svg";
 import "./Home.scss";
 
 export const Home = () => {
   const [btnIsVisible, setBtnIsVisible] = useState<boolean>(false);
-  const episodes = useSelector((state: RootState) => state.episodes.results);
   const error = useSelector((state: RootState) => state.episodes.error);
   const dispatch = useAppDispatch();
 
@@ -55,34 +53,7 @@ export const Home = () => {
           По вашему запросу ничего не найдено. Измените параметры поиска
         </p>
       ) : (
-        <ul className="home__list">
-          {episodes.length > 0 && (
-            <>
-              <div className="home__line">
-                <div className="home__line-title">
-                  {episodes[0].episode.slice(0, 3)}
-                </div>
-              </div>
-              {episodes.map((el: Episode, idx) => (
-                <React.Fragment key={el.id}>
-                  <li>
-                    <EpisodeCard {...el} />
-                  </li>
-
-                  {episodes[idx + 1] &&
-                    episodes[idx + 1].episode.slice(0, 3) !==
-                      episodes[idx].episode.slice(0, 3) && (
-                      <div className="home__line" key={idx}>
-                        <div className="home__line-title">
-                          {episodes[idx + 1].episode.slice(0, 3)}
-                        </div>
-                      </div>
-                    )}
-                </React.Fragment>
-              ))}
-            </>
-          )}
-        </ul>
+        <EpisodesList />
       )}
 
       {btnIsVisible && (

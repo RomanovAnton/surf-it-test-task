@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { EpisodesState } from "./types";
+import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
-
-const BASE_URL = "https://rickandmortyapi.com/api";
 
 const fetchEpisodes = createAsyncThunk<
   EpisodesState,
