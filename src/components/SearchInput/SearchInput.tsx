@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import searchIcon from "../../assets/search-icon.svg";
 import { useDispatch } from "react-redux";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -11,7 +11,7 @@ import "./SearchInput.scss";
 export const SearchInput = () => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedValue = useDebounce(value, 800);
 
   useEffect(() => {
     dispatch(setSearchValue(debouncedValue));
