@@ -10,9 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
 import image from "../../assets/episode-image.png";
 import { SortParams } from "../../enum/SortParams";
-import "./EpisodeItem.scss";
+import "./EpisodeCard.scss";
 
-export const EpisodeItem: React.FC<Episode> = (item) => {
+export const EpisodeCard: React.FC<Episode> = (item) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const searchValue = useSelector(
@@ -34,9 +34,11 @@ export const EpisodeItem: React.FC<Episode> = (item) => {
       <div className="episode__image">
         <img src={image} alt="episode-image" />
       </div>
-      <h2>{item.name}</h2>
-      <p>{item.air_date}</p>
-      <p>{item.episode}</p>
+      <div className="episode__content">
+        <h2 className="episode__name">{item.name}</h2>
+        <p className="episode__text">{item.air_date}</p>
+        <p className="episode__text">{item.episode}</p>
+      </div>
     </div>
   );
 };
