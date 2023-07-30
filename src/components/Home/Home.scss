@@ -5,6 +5,12 @@
   flex-direction: column;
   gap: 25px;
 
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
   &__list {
     width: 100%;
     margin: 0;
@@ -23,5 +29,11 @@
     height: 2px;
     background-color: red;
     grid-column: -1 / 1;
+  }
+
+  @media screen and (max-width: 767px) {
+    &__filter {
+      flex-direction: column;
+    }
   }
 }

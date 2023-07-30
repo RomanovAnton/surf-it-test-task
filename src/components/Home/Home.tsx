@@ -6,6 +6,7 @@ import { EpisodeItem } from "../EpisodeItem/EpisodeItem";
 import { nextPage } from "../../redux/episodes/episodesSlice";
 import { SearchInput } from "../SearchInput/SearchInput";
 import { Errors } from "../../enum/Errors";
+import { Sort } from "../Sort/Sort";
 import "./Home.scss";
 
 export const Home = () => {
@@ -29,7 +30,11 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <SearchInput />
+      <div className="home__filter">
+        <SearchInput />
+        <Sort />
+      </div>
+
       {error == Errors.NOT_FOUND ? (
         <p className="home__notfound">
           По вашему запросу ничего не найдено. Измените параметры поиска

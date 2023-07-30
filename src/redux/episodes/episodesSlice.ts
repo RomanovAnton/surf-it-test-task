@@ -3,6 +3,7 @@ import { Episode, EpisodesState } from "./types";
 import fetchEpisodes from "./asyncAction";
 import { getCurrentPage } from "../../utils/utils";
 import { Errors } from "../../enum/Errors";
+import { SortParams } from "../../enum/SortParams";
 
 const initialState: EpisodesState = {
   results: [],
@@ -16,6 +17,7 @@ const initialState: EpisodesState = {
   searchValue: "",
   currentPage: 1,
   currentItem: null,
+  sortParam: SortParams.ID,
   error: "",
 };
 
@@ -37,6 +39,28 @@ const episodesSlice = createSlice({
     },
     setCurrentItem: (state, action: PayloadAction<Episode>) => {
       state.currentItem = action.payload;
+    },
+    setSortParam: (state, action: PayloadAction<string>) => {
+      state.sortParam = action.payload;
+    },
+    sortResults: (state) => {
+      const newArr = [...state.results];
+
+      if (state.sortParam == SortParams.DATE_EARLY) {
+        newArr.sort((a, b) => {
+          return new Date(a.created).getTime() - new Date(b.created).getTime();
+        });
+      } else if (state.sortParam == SortParams.DATE_RECENT) {
+        newArr.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        });
+      } else if (state.sortParam == SortParams.ID) {
+        newArr.sort((a, b) => {
+          return a.id - b.id;
+        });
+      }
+
+      state.results = newArr;
     },
   },
   extraReducers: (builder) => {
@@ -69,6 +93,12 @@ const episodesSlice = createSlice({
   },
 });
 
-export const { nextPage, setSearchValue, clearResults, setCurrentItem } =
-  episodesSlice.actions;
+export const {
+  nextPage,
+  setSearchValue,
+  clearResults,
+  setCurrentItem,
+  sortResults,
+  setSortParam,
+} = episodesSlice.actions;
 export default episodesSlice.reducer;

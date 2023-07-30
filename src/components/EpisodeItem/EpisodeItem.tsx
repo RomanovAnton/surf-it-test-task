@@ -4,10 +4,12 @@ import {
   clearResults,
   setCurrentItem,
   setSearchValue,
+  setSortParam,
 } from "../../redux/episodes/episodesSlice";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
 import image from "../../assets/episode-image.png";
+import { SortParams } from "../../enum/SortParams";
 import "./EpisodeItem.scss";
 
 export const EpisodeItem: React.FC<Episode> = (item) => {
@@ -21,6 +23,7 @@ export const EpisodeItem: React.FC<Episode> = (item) => {
     dispatch(setCurrentItem(item));
     navigate(`/episode/${item.id}`);
     dispatch(setSearchValue(""));
+    dispatch(setSortParam(SortParams.ID));
     if (searchValue) {
       dispatch(clearResults());
     }

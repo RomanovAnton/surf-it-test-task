@@ -19,7 +19,7 @@ export interface EpisodesState {
   currentPage: number;
   currentItem: Episode | null;
   searchValue: string;
+  sortParam: string;
   isLoading: boolean;
   error: string;
 }
-
