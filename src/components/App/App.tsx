@@ -4,8 +4,10 @@ import { EpisodeInfo } from "../EpisodeInfo/EpisodeInfo";
 import { useEffect } from "react";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
-import fetchEpisodes from "../../redux/episodes/asyncAction";
 import { CharacterInfo } from "../CharacterInfo/CharacterInfo";
+import { LocationInfo } from "../LocationInfo/LocationInfo";
+import fetchEpisodes from "../../redux/episodes/asyncAction";
+import { Header } from "../Header/Header";
 import "./App.scss";
 
 export const App: React.FC = () => {
@@ -20,10 +22,12 @@ export const App: React.FC = () => {
 
   return (
     <div className="app">
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="episode/:episodeId" element={<EpisodeInfo />} />
         <Route path="character/:characterId" element={<CharacterInfo />} />
+        <Route path="location/:locationName" element={<LocationInfo />} />
       </Routes>
     </div>
   );

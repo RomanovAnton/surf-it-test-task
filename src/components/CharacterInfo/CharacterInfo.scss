@@ -1,7 +1,6 @@
 .character-info {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 
   &__image {
     width: 25%;
@@ -24,13 +23,25 @@
   }
 
   &__name {
-    font-size: 26px;
-    margin: 0;
+    font-size: 28px;
+    margin: 0 0 16px;
   }
 
   &__text {
     font-size: 22px;
     margin: 0;
     color: grey;
+
+    &_link {
+      text-decoration: underline;
+      color: blue;
+      cursor: pointer;
+    }
+
+    &_disabled {
+      text-decoration: underline;
+      color: rgb(210, 210, 210);
+      cursor: default;
+    }
   }
 }

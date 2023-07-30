@@ -1,4 +1,4 @@
-.episode-info {
+.location-info {
   &__title {
     font-size: 28px;
     margin: 0;
@@ -9,9 +9,9 @@
     margin: 24px 0 0;
   }
 
-  &__num {
-    margin: 8px 0 0;
-    font-size: 24px;
+  &__text {
+    font-size: 22px;
+    margin: 0;
     color: grey;
   }
 
