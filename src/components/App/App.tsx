@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import fetchEpisodes from "../../redux/episodes/asyncAction";
+import { CharacterInfo } from "../CharacterInfo/CharacterInfo";
 import "./App.scss";
 
 export const App: React.FC = () => {
@@ -21,7 +22,8 @@ export const App: React.FC = () => {
     <div className="app">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="episode/:pizzaId" element={<EpisodeInfo />} />
+        <Route path="episode/:episodeId" element={<EpisodeInfo />} />
+        <Route path="character/:characterId" element={<CharacterInfo />} />
       </Routes>
     </div>
   );

@@ -9,7 +9,7 @@ import {
 import "./SearchInput.scss";
 
 export const SearchInput = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const dispatch = useDispatch();
   const debouncedValue = useDebounce(value, 800);
 

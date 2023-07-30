@@ -1,0 +1,14 @@
+.back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+  color: #808080;
+  cursor: pointer;
+
+  &__icon {
+    width: 25px;
+    filter: invert(51%) sepia(0%) saturate(0%) hue-rotate(203deg)
+      brightness(98%) contrast(84%);
+  }
+}

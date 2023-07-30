@@ -1,0 +1,27 @@
+.episode-info {
+  &__title {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    margin: 24px 0 0;
+  }
+
+  &__num {
+    margin: 8px 0 0;
+    font-size: 20px;
+    color: grey;
+  }
+  
+  &__characters {
+    width: 100%;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 215px));
+    gap: 30px;
+  }
+}

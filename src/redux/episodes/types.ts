@@ -22,3 +22,4 @@ export interface EpisodesState {
   isLoading: boolean;
   error: string;
 }
+
